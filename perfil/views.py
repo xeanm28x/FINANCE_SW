@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from .utils import calcula_total
 from datetime import datetime
-from contas.views import ver_contas
+from contas.views import quantificar_contas
 
 def home(request):
     contas = Conta.objects.all()
@@ -18,8 +18,9 @@ def home(request):
     total_saidas = calcula_total(saidas, 'valor')
 
     percentual_gastos_essenciais, percentual_gastos_nao_essenciais = calcula_equilibrio_financeiro()
+    t_contas_vencidas, t_contas_proximas_vencimento = quantificar_contas()
 
-    return render(request, 'home.html', {'contas': contas, 'total_contas': total_contas, 'total_entradas': total_entradas, 'total_saidas': total_saidas, 'percentual_gastos_essenciais' : int(percentual_gastos_essenciais), 'percentual_gastos_nao_essenciais' : int(percentual_gastos_nao_essenciais)})
+    return render(request, 'home.html', {'contas': contas, 'total_contas': total_contas, 'total_entradas': total_entradas, 'total_saidas': total_saidas, 'percentual_gastos_essenciais' : int(percentual_gastos_essenciais), 'percentual_gastos_nao_essenciais' : int(percentual_gastos_nao_essenciais), 't_contas_vencidas' : t_contas_vencidas, 't_contas_proximas_vencimento' : t_contas_proximas_vencimento})
 
 def gerenciar(request):
     contas = Conta.objects.all()
