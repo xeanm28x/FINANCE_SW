@@ -3,7 +3,7 @@ from perfil.models import Categoria
 from .models import ContaPagar, ContaPaga
 from django.contrib import messages
 from django.contrib.messages import constants
-from datetime import datetime
+from datetime import datetime, date
 
 def definir_contas(request):
     if request.method == "GET":
@@ -57,3 +57,16 @@ def quantificar_contas():
     t_contas_proximas_vencimento = len(contas_proximas_vencimento)
 
     return t_contas_vencidas, t_contas_proximas_vencimento
+
+def pagar_conta(request, id):
+    try:
+        conta_a_pagar = ContaPagar.objects.get(id = id)
+        conta_paga = ContaPaga(
+            conta_id = id,
+            data_pagamento = date.today()
+        )
+        conta_paga.save()
+    except IndexError:
+        messages.add_message(request, constants.ERROR, 'Conta não encontrada!')
+
+    return redirect('/contas/ver_contas')

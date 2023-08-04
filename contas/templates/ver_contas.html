@@ -43,7 +43,7 @@
                                         Dia: {{conta.dia_pagamento}}
                                     </div>
                                     <div class="col-md text-center">
-                                        <a href="#" class="botao-principal">PAGAR</a>
+                                        <a href="{% url 'pagar_conta' conta.id %}" class="botao-principal">PAGAR</a>
                                     </div> 
                                 </div>
                             </div>
@@ -54,24 +54,25 @@
                 <br>
                 <p class="fonte-destaque" style="color: #E96363;">Contas próximas do vencimento</p>
                 <div class="card">
-                    
-                    {% for conta in contas_proximas_vencimento %}
-                            <div class="linha-conta">
-                                <div class="row">
-                                    <div class="col-md text-center">
-                                        {{conta}}
+                    {% if not contas_proximas_vencimento%}
+                        <p class="fonte-destaque">Ufa, nenhuma conta próxima do vencimento.</p>
+                    {% else %}
+                        {% for conta in contas_proximas_vencimento %}
+                                <div class="linha-conta">
+                                    <div class="row">
+                                        <div class="col-md text-center">
+                                            {{conta}}
+                                        </div>
+                                        <div class="col-md text-center">
+                                            Dia: {{conta.dia_pagamento}}
+                                        </div>
+                                        <div class="col-md text-center">
+                                            <a href="{% url 'pagar_conta' conta.id %}" class="botao-principal">PAGAR</a>
+                                        </div> 
                                     </div>
-                                    <div class="col-md text-center">
-                                        Dia: {{conta.dia_pagamento}}
-                                    </div>
-                                    <div class="col-md text-center">
-                                        <a href="#" class="botao-principal">PAGAR</a>
-                                    </div> 
                                 </div>
-                            </div>
-                    {% endfor %}    
-                        
-                    
+                        {% endfor %}    
+                    {% endif %}    
                 </div>
                 <br>
                 <br>
@@ -90,7 +91,7 @@
                                             Dia: {{conta.dia_pagamento}}
                                         </div>
                                         <div class="col-md text-center">
-                                            <a href="#" class="botao-principal">PAGAR</a>
+                                            <a href="{% url 'pagar_conta' conta.id %}" class="botao-principal">PAGAR</a>
                                         </div> 
                                     </div>
                                 </div>
