@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import Conta, Categoria
 from extrato.models import Valores
 from django.contrib import messages
 from django.contrib.messages import constants
 from .utils import calcula_total
 from datetime import datetime
+from contas.views import ver_contas
 
 def home(request):
     contas = Conta.objects.all()

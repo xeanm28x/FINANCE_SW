@@ -70,7 +70,6 @@ def view_extrato(request):
 
     valores = valores.filter()
     
-    #to do: botao pra zerar filtro
     #to do: filtro por periodo
 
     return render(request, 'view_extrato.html', {'contas': contas, 'categorias': categorias, 'valores': valores})
