@@ -60,18 +60,27 @@ def view_extrato(request):
 
     contas = Conta.objects.all()
     categorias = Categoria.objects.all()
-    valores = Valores.objects.filter(data__month = datetime.now().month)
+    valores = Valores.objects.all()
     conta_filtro = request.GET.get('conta')
     categoria_filtro = request.GET.get('categoria')
+    periodo_filtro = request.GET.get('periodo')
+    MES_ATUAL = datetime.now().month
+    DIA_ATUAL = datetime.now().day
+    ANO_ATUAL = datetime.now().year
 
-    if conta_filtro and categoria_filtro:
+    if conta_filtro and categoria_filtro and periodo_filtro:
         valores = valores.filter(conta__id = conta_filtro)
         valores = valores.filter(categoria__id = categoria_filtro)
-
-    valores = valores.filter()
+        match periodo_filtro:
+            case "7":
+                valores = valores.filter(data__month = MES_ATUAL).filter(data__day__gte = DIA_ATUAL - 7)
+            case "30":
+                valores = valores.filter(data__month = MES_ATUAL)
+            case "365":
+                valores = valores.filter(data__year = ANO_ATUAL)
+            case _:
+                valores = valores.filter(data__year = ANO_ATUAL)
     
-    #to do: filtro por periodo
-
     return render(request, 'view_extrato.html', {'contas': contas, 'categorias': categorias, 'valores': valores})
 
 def exportar_pdf(request):
