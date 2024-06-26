@@ -18,7 +18,6 @@ desenvolver uma aplicação web a nível introdutório para que os usuários pos
 
 ## 🔎 referências
 
- - [FINANCE.SW Documentation](https://ste-dio-bootcamp-ifood.notion.site/FINANCE-SW-22fac639636d4868aab11f5ce6457c70?pvs=4) ❗⚠
  - [Pythonando](https://pythonando.com.br/psw/evento/)
  - [README Editor](https://readme.so/pt/editor)
  - [Git Documentation](https://git-scm.com/doc)
